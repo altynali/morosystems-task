@@ -1,5 +1,5 @@
-import { FC } from "react"
-import { Button, Grid, Typography } from "@mui/material"
+import { FC, useEffect, useState } from "react"
+import { Grid, Typography } from "@mui/material"
 import { MyCard } from "../../card/MyCard"
 import classes from "./TodoItem.module.css"
 import { TodoType } from "../../../redux/reducers/todo/types"
@@ -16,7 +16,21 @@ export type TodoItemProps = {
 export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   const dispatch = useAppDispatch()
 
-  const { id, text, completedDate, createdDate } = todo
+  const { id, text, completedDate, createdDate, completed } = todo
+  const [isCompleted, setIsCompleted] = useState<boolean>(completed)
+
+  const onCheckboxOnchange = () => {
+    const updatedIsCompleted = !isCompleted
+    setIsCompleted(updatedIsCompleted)
+
+    if (id) {
+      handleComplete?.(id, updatedIsCompleted)
+    }
+  }
+
+  useEffect(() => {
+    setIsCompleted(completed)
+  }, [completed])
 
   const handleDeleteTodo = () => {
     dispatch(deleteTodo({ id }))
@@ -40,19 +54,11 @@ export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
       justifyContent="center"
     >
       <MyCard
-        {...todo}
         withCheckbox
-        button={
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="error"
-            onClick={handleDeleteTodo}
-          >
-            Delete
-          </Button>
-        }
-        handleComplete={handleComplete}
+        onCheckboxOnchange={onCheckboxOnchange}
+        isCompleted={isCompleted}
+        handleButtonClick={handleDeleteTodo}
+        buttonText="Delete"
       >
         <Typography variant="h6" gutterBottom>
           {text}
