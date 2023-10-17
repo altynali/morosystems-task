@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { TodoType } from "../types"
-import todoApi from "../../../../config/axiosConfig"
 import axios from "axios"
+import todoApi from "../../../config/axiosConfig"
 
 interface Success {
   data: TodoType[]

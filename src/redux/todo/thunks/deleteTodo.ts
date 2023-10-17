@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import todoApi from "../../../../config/axiosConfig"
 import axios from "axios"
+import todoApi from "../../../config/axiosConfig"
 
 interface Payload {
   id: string
@@ -16,12 +16,12 @@ export const deleteTodo = createAsyncThunk<
   {
     rejectValue: any
   }
->("todoReducer/deleteTodo", async (payload, { rejectWithValue }) => {
+>("todoReducer/deleteTodo", async ({ id }, { rejectWithValue }) => {
   try {
-    await todoApi.delete(`/tasks/${payload.id}`)
+    await todoApi.delete(`/tasks/${id}`)
 
     return {
-      id: payload.id,
+      id,
     }
   } catch (error) {
     const errorData = axios.isAxiosError(error) ? error.response?.data : error

@@ -1,11 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { FetchState, TodoState } from "./types"
-import { fetchTodos } from "./actions/fetchTodos"
-import { RootState } from "../../rootReducer"
-import { createTodo } from "./actions/createTodo"
-import { completeTodo } from "./actions/completeTodo"
-import { incompleteTodo } from "./actions/incompleteTodo"
-import { deleteTodo } from "./actions/deleteTodo"
+import { FetchState, TodoState, TodoType } from "./types"
+import { RootState } from "../rootReducer"
+import { errorReducers } from "./errorReducers"
+import {
+  fetchTodos,
+  createTodo,
+  deleteTodo,
+  editTodoText,
+  completeTodo,
+  incompleteTodo,
+} from "./thunks"
+import { updateTodoInState } from "./actions/updateTodoAction"
 
 const initialState: TodoState = {
   todos: [],
@@ -17,6 +22,11 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // Error reducers
+    Object.keys(errorReducers).forEach((actionType) => {
+      builder.addCase(actionType, errorReducers[actionType])
+    })
+
     //FETCH TODOS LOADING
     builder.addCase(fetchTodos.pending, (state) => {
       state.fetchState = FetchState.Loading
@@ -41,21 +51,20 @@ export const todoSlice = createSlice({
       state.todos = state.todos.filter((todo) => todo.id !== id)
     })
 
+    //EDIT TODO TEXT
+    builder.addCase(editTodoText.fulfilled, (state, { payload }) => {
+      updateTodoInState(state, payload.changedTodo)
+    })
+
     //COMPLETE TODO
-    builder.addCase(
-      completeTodo.fulfilled || incompleteTodo.fulfilled,
-      (state, { payload }) => {
-        const { changedTodo } = payload
+    builder.addCase(completeTodo.fulfilled, (state, { payload }) => {
+      updateTodoInState(state, payload.changedTodo)
+    })
 
-        const todoIndex = state.todos.findIndex(
-          (todo) => todo.id === changedTodo.id
-        )
-
-        if (todoIndex !== -1) {
-          state.todos[todoIndex] = changedTodo
-        }
-      }
-    )
+    //INCOMPLETE TODO
+    builder.addCase(incompleteTodo.fulfilled, (state, { payload }) => {
+      updateTodoInState(state, payload.changedTodo)
+    })
   },
 })
 
@@ -64,4 +73,4 @@ export const todoSliceActions = todoSlice.actions
 export const selectTodoReducer = (state: RootState) => state.todoReducer
 
 export const selectCompletedTodosLength = (state: RootState) =>
-  state.todoReducer.todos.filter((todo) => todo.completed).length
+  state.todoReducer.todos.filter((todo: TodoType) => todo.completed).length

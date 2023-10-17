@@ -6,7 +6,7 @@ import {
   SelectProps,
 } from "@mui/material"
 import { FC } from "react"
-import { Option } from "../../redux/reducers/todo/types"
+import { Option } from "../../redux/todo/types"
 
 type MySelectProps = {
   name: string

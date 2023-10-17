@@ -3,22 +3,22 @@ import { useState } from "react"
 import { MyInput } from "../input/MyInput"
 import classes from "./Form.module.css"
 import { useAppDispatch } from "../../redux/store"
-import { createTodo } from "../../redux/reducers/todo/actions/createTodo"
+import { createTodo } from "../../redux/todo/thunks"
 
 export const Form = () => {
   const dispatch = useAppDispatch()
 
   const [name, setName] = useState<string>("")
-  // const [description, setDescription] = useState<string>("")
-  // const [time, setTime] = useState<string>("")
+  const [error, setError] = useState<string>("")
 
   const handleCreateToDo = () => {
-    if (!name) return
+    if (!name) {
+      setError("Name is required")
+      return
+    }
     dispatch(createTodo({ text: name }))
 
     setName("")
-    // setDescription("")
-    // setTime("")
   }
 
   return (
@@ -27,25 +27,10 @@ export const Form = () => {
         required
         className={classes.input}
         label="Name"
-        helperText=""
+        helperText={error}
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      {/* <MyInput
-        className={classes.input}
-        label="Description"
-        helperText=""
-        value={description}
-        onChange={setDescription}
-      />
-      <MyInput
-        required
-        className={classes.input}
-        helperText=""
-        value={time}
-        onChange={setTime}
-        type="datetime-local"
-      /> */}
       <Button variant="contained" color="primary" onClick={handleCreateToDo}>
         Add
       </Button>

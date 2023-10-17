@@ -1,4 +1,4 @@
-import { FilterTodoByValues, TodoType } from "../redux/reducers/todo/types"
+import { FilterTodoByValues, TodoType } from "../redux/todo/types"
 
 export const filterTodos = (
   todos: TodoType[],

@@ -36,3 +36,7 @@ export const filterTodoByArr = [
 ]
 
 export const filterTodoByDefaultValue = FilterTodoByValues.All
+
+export interface SuccessUpdateTodo {
+  changedTodo: TodoType
+}

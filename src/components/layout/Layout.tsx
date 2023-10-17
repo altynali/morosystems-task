@@ -3,9 +3,9 @@ import { Footer } from "../footer/Footer"
 import { Header } from "../header/Header"
 import classes from "./Layout.module.css"
 import { useAppSelector } from "../../redux/store"
-import { selectTodoReducer } from "../../redux/reducers/todo/todoReducer"
-import { FetchState } from "../../redux/reducers/todo/types"
 import { Loader } from "../loader/Loader"
+import { selectTodoReducer } from "../../redux/todo/todoSlice"
+import { FetchState } from "../../redux/todo/types"
 
 export type LayoutProps = PropsWithChildren
 

@@ -28,7 +28,9 @@ export const MyInput: FC<TextFieldProps> = ({
           onChange={onChange}
           type={type}
         />
-        <FormHelperText id="my-helper-text">{helperText}</FormHelperText>
+        <FormHelperText id="my-helper-text" error>
+          {helperText}
+        </FormHelperText>
       </FormControl>
     </div>
   )

@@ -15,10 +15,8 @@ export const deleteAllCompletedTodos = createAsyncThunk<
   }
 >(
   "todoReducer/deleteAllCompletedTodos",
-  async (payload, { rejectWithValue, dispatch }) => {
+  async ({ todos }, { rejectWithValue, dispatch }) => {
     try {
-      const todos = payload.todos
-
       await Promise.all(
         todos.map(async (todo) => {
           if (todo.completed) {

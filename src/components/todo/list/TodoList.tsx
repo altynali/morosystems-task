@@ -1,17 +1,14 @@
 import { TodoItem } from "../item/TodoItem"
-import { selectTodoReducer } from "../../../redux/reducers/todo/todoReducer"
 import { useAppDispatch, useAppSelector } from "../../../redux/store"
 import classes from "./TodoList.module.css"
 import { Grid } from "@mui/material"
 import { TodoTopSection } from "../topSection/TodoTopSection"
-import {
-  FilterTodoByValues,
-  TodoType,
-} from "../../../redux/reducers/todo/types"
 import { useCallback, useEffect, useState } from "react"
 import { filterTodos } from "../../../utils/filterTodos"
-import { makeAllTodosCompleted } from "../../../redux/reducers/todo/actions/makeAllTodosCompleted"
-import { deleteAllCompletedTodos } from "../../../redux/reducers/todo/actions/deleteAllCompletedTodos"
+import { selectTodoReducer } from "../../../redux/todo/todoSlice"
+import { deleteAllCompletedTodos } from "../../../redux/todo/thunks"
+import { makeAllTodosCompleted } from "../../../redux/todo/thunks"
+import { TodoType, FilterTodoByValues } from "../../../redux/todo/types"
 
 export const TodoList = () => {
   const dispatch = useAppDispatch()

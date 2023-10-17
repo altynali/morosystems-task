@@ -1,17 +1,17 @@
 import { FC } from "react"
-import {
-  selectCompletedTodosLength,
-  selectTodoReducer,
-} from "../../../redux/reducers/todo/todoReducer"
-import {
-  FilterTodoByValues,
-  filterTodoByArr,
-  filterTodoByDefaultValue,
-} from "../../../redux/reducers/todo/types"
 import { useAppSelector } from "../../../redux/store"
 import MySelect from "../../select/Select"
 import classes from "./TodoTopSection.module.css"
 import { Button, FormControl, Grid, SelectChangeEvent } from "@mui/material"
+import {
+  FilterTodoByValues,
+  filterTodoByArr,
+  filterTodoByDefaultValue,
+} from "../../../redux/todo/types"
+import {
+  selectCompletedTodosLength,
+  selectTodoReducer,
+} from "../../../redux/todo/todoSlice"
 
 type TodoTopSectionProps = {
   onChange: (filterTodoBy: FilterTodoByValues) => void

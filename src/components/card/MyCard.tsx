@@ -26,8 +26,8 @@ export const MyCard: FC<MyCardProps> = ({
         <Checkbox checked={isCompleted} onChange={onCheckboxOnchange} />
       )}
       <div className={classes.content}>
-        {children}
-        <div className={classes.button}>
+        <div>{children}</div>
+        <div className={classes.buttonWrapper}>
           <Button
             className={classes.button}
             variant="contained"

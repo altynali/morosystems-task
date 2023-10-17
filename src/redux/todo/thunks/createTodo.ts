@@ -1,30 +1,28 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { TodoType } from "../types"
-import todoApi from "../../../../config/axiosConfig"
 import axios from "axios"
+import todoApi from "../../../config/axiosConfig"
 
 interface Payload {
-  id: string
+  text: string
 }
 
 interface Success {
-  changedTodo: TodoType
+  newTodo: TodoType
 }
 
-export const incompleteTodo = createAsyncThunk<
+export const createTodo = createAsyncThunk<
   Success,
   Payload,
   {
     rejectValue: any
   }
->("todoReducer/incompleteTodo", async (payload, { rejectWithValue }) => {
+>("todoReducer/createTodo", async (payload, { rejectWithValue }) => {
   try {
-    const response = await todoApi.post(`/tasks/${payload.id}/incomplete`, {
-      params: payload,
-    })
+    const response = await todoApi.post("/tasks", payload)
 
     return {
-      changedTodo: response.data,
+      newTodo: response.data,
     }
   } catch (error) {
     const errorData = axios.isAxiosError(error) ? error.response?.data : error
