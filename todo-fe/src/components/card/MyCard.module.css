@@ -1,0 +1,24 @@
+.card {
+  display: flex;
+  min-height: 100%;
+}
+
+.content {
+  margin: 0 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buttonWrapper {
+  display: flex;
+  padding: 10px;
+  justify-content: end;
+  align-items: flex-end;
+}
+
+.button {
+  background-color: #ff5733;
+  color: #fff;
+}
