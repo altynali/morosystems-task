@@ -1,9 +1,9 @@
-import axios, { AxiosRequestConfig } from "axios"
+import axios, { AxiosRequestConfig } from "axios";
 
 const config: AxiosRequestConfig = {
-  baseURL: process.env.REACT_APP_BASE_URL,
-}
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
+};
 
-const todoApi = axios.create(config)
+const todoApi = axios.create(config);
 
-export default todoApi
+export default todoApi;
