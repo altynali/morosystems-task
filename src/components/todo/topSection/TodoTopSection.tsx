@@ -1,36 +1,36 @@
-import { FC } from "react"
-import { useAppSelector } from "../../../redux/store"
-import MySelect from "../../select/Select"
-import classes from "./TodoTopSection.module.css"
-import { Button, FormControl, Grid, SelectChangeEvent } from "@mui/material"
+import { FC } from "react";
+import { useAppSelector } from "../../../redux/store";
+import MySelect from "../../select/Select";
+import classes from "./TodoTopSection.module.css";
+import { Button, FormControl, Grid, SelectChangeEvent } from "@mui/material";
 import {
   FilterTodoByValues,
   filterTodoByArr,
   filterTodoByDefaultValue,
-} from "../../../redux/todo/types"
+} from "../../../redux/todo/types";
 import {
   selectCompletedTodosLength,
   selectTodoReducer,
-} from "../../../redux/todo/todoSlice"
+} from "../../../redux/todo/todoSlice";
 
 type TodoTopSectionProps = {
-  onChange: (filterTodoBy: FilterTodoByValues) => void
-  handleDeleteAllCompletedTodos: () => void
-  handleMakeAllTodosCompleted: () => void
-}
+  onChange: (filterTodoBy: FilterTodoByValues) => void;
+  handleDeleteAllCompletedTodos: () => void;
+  handleMakeAllTodosCompleted: () => void;
+};
 
 export const TodoTopSection: FC<TodoTopSectionProps> = ({
   onChange,
   handleDeleteAllCompletedTodos,
   handleMakeAllTodosCompleted,
 }) => {
-  const completedTodosLength = useAppSelector(selectCompletedTodosLength)
-  const { todos } = useAppSelector(selectTodoReducer)
-  const todosLength = todos.length
+  const completedTodosLength = useAppSelector(selectCompletedTodosLength);
+  const { todos } = useAppSelector(selectTodoReducer);
+  const completedTodosStr = `${completedTodosLength} / ${todos.length}`;
 
   const handleChange = (e: SelectChangeEvent<unknown>) => {
-    onChange(e.target.value as FilterTodoByValues)
-  }
+    onChange(e.target.value as FilterTodoByValues);
+  };
 
   return (
     <Grid
@@ -41,9 +41,7 @@ export const TodoTopSection: FC<TodoTopSectionProps> = ({
       gap={2}
     >
       <Grid item xs={6} md={2}>
-        <div>
-          Completed Todos: {completedTodosLength}/{todosLength}
-        </div>
+        Completed Todos: {completedTodosStr}
       </Grid>
       <Grid item xs={6} md={3}>
         <Button
@@ -75,5 +73,5 @@ export const TodoTopSection: FC<TodoTopSectionProps> = ({
         </FormControl>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
