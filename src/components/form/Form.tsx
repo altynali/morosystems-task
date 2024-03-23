@@ -4,7 +4,7 @@ import { MyInput } from "../input/MyInput";
 import classes from "./Form.module.css";
 import { useAppDispatch } from "../../redux/store";
 import { createTodo } from "../../redux/todo/thunks";
-import { nameValidation } from "../../utils/validation";
+import { validateName } from "../../utils/validation/validation";
 
 export const Form = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ export const Form = () => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
 
   const handleCreateToDo = () => {
-    if (validateName(name)) {
+    if (validateName(name, isDirty, setError)) {
       dispatch(createTodo({ text: name }));
       setName("");
       setError("");
@@ -23,23 +23,7 @@ export const Form = () => {
 
   const nameChangeHandler = (value: string) => {
     setName(value);
-    validateName(value);
-  };
-
-  const validateName = (name: string) => {
-    const { requiredMessage, pattern } = nameValidation();
-
-    if (!name) {
-      setError(requiredMessage);
-      return false;
-    }
-    if (!isDirty && !name.match(pattern.value)) {
-      setError(pattern.message);
-      return false;
-    }
-
-    setError("");
-    return true;
+    validateName(value, isDirty, setError);
   };
 
   return (

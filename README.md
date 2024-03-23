@@ -32,3 +32,5 @@ export default {
 # .env file for this application:
 
 VITE_APP_BASE_URL=http://localhost:8080
+
+# In projects with a greater number of fields requiring validation, I use the yup library.
