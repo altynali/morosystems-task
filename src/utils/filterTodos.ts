@@ -1,4 +1,4 @@
-import { FilterTodoByValues, TodoType } from "../redux/todo/types"
+import { FilterTodoByValues, TodoType } from "../redux/todo/types";
 
 export const filterTodos = (
   todos: TodoType[],
@@ -6,13 +6,13 @@ export const filterTodos = (
 ) => {
   switch (filterTodoBy) {
     case FilterTodoByValues.All:
-      return todos
+      return todos;
     case FilterTodoByValues.Completed:
-      return todos.filter((todo) => todo.completed === true)
+      return todos.filter((todo) => todo.completed);
     case FilterTodoByValues.Incompleted:
-      return todos.filter((todo) => todo.completed === false)
+      return todos.filter((todo) => !todo.completed);
 
     default:
-      return todos
+      return todos;
   }
-}
+};

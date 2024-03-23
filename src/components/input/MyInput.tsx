@@ -3,8 +3,8 @@ import {
   FormHelperText,
   TextField,
   TextFieldProps,
-} from "@mui/material"
-import { FC } from "react"
+} from "@mui/material";
+import { FC } from "react";
 
 export const MyInput: FC<TextFieldProps> = ({
   helperText,
@@ -15,6 +15,7 @@ export const MyInput: FC<TextFieldProps> = ({
   className,
   required,
   type,
+  ...rest
 }) => {
   return (
     <div className={className}>
@@ -27,11 +28,12 @@ export const MyInput: FC<TextFieldProps> = ({
           value={value}
           onChange={onChange}
           type={type}
+          {...rest}
         />
         <FormHelperText id="my-helper-text" error>
           {helperText}
         </FormHelperText>
       </FormControl>
     </div>
-  )
-}
+  );
+};
