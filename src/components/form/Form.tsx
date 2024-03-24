@@ -4,7 +4,8 @@ import { MyInput } from "../input/MyInput";
 import classes from "./Form.module.css";
 import { useAppDispatch } from "../../redux/store";
 import { createTodo } from "../../redux/todo/thunks";
-import { validateName } from "../../utils/validation/validation";
+import { isNameValid } from "../../utils/validation/validation";
+import { debounce } from "../../utils/debounce/debounce";
 
 export const Form = () => {
   const dispatch = useAppDispatch();
@@ -12,18 +13,24 @@ export const Form = () => {
   const [name, setName] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isDirty, setIsDirty] = useState<boolean>(false);
+  const isFormValid = !error && name && isDirty;
 
   const handleCreateToDo = () => {
-    if (validateName(name, isDirty, setError)) {
+    if (isFormValid) {
       dispatch(createTodo({ text: name }));
       setName("");
       setError("");
     }
   };
 
+  const debouncedValidation = debounce((value: string) => {
+    isNameValid(value, isDirty, setError);
+  }, 300);
+
   const nameChangeHandler = (value: string) => {
     setName(value);
-    validateName(value, isDirty, setError);
+    //for better performance
+    debouncedValidation(value);
   };
 
   return (
@@ -37,7 +44,12 @@ export const Form = () => {
         onChange={(e) => nameChangeHandler(e.target.value)}
         onBlur={() => setIsDirty(true)}
       />
-      <Button variant="contained" color="primary" onClick={handleCreateToDo}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleCreateToDo}
+        disabled={!isFormValid}
+      >
         Add
       </Button>
     </Box>

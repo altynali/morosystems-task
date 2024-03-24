@@ -1,5 +1,11 @@
-export const isScreenSmallerThan = (width: number) => {
-  const screenWidth = window.screen.width
+//function chceks if out screen is smaller than passed width
+export const isScreenSmallerThan = (width: number, mockWindow?: Window) => {
+  let screenWidth = window.screen.width;
 
-  return screenWidth < width
-}
+  // Mocking screen width, for the test
+  if (mockWindow) {
+    screenWidth = mockWindow.screen.width;
+  }
+
+  return screenWidth < width;
+};

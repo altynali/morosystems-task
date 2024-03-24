@@ -1,5 +1,6 @@
 import { ValidationType } from "./types";
 
+//validating condition for our name field
 export const nameValidation: ValidationType = {
   requiredMessage: "Name is required",
   pattern: {
@@ -8,22 +9,29 @@ export const nameValidation: ValidationType = {
   },
 };
 
-export const validateName = (
+//function validats our name field, returns boolean
+export const isNameValid = (
   name: string,
   isDirty: boolean,
   setError: (error: string) => void
 ) => {
   const { requiredMessage, pattern } = nameValidation;
+  console.log(isDirty);
 
-  if (!name) {
-    setError(requiredMessage);
-    return false;
-  }
-  if (!isDirty && !name.match(pattern.value)) {
-    setError(pattern.message);
-    return false;
+  if (isDirty) {
+    //if name is empty, it is an error
+    if (!name) {
+      setError(requiredMessage);
+      return false;
+    }
+    //if name doesn't match our regular expression and it is touched
+    if (!name.match(pattern.value)) {
+      setError(pattern.message);
+      return false;
+    }
   }
 
+  //otherwise there is no error and we want to return true
   setError("");
   return true;
 };
