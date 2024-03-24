@@ -18,19 +18,21 @@ export const isNameValid = (
   const { requiredMessage, pattern } = nameValidation;
 
   if (isDirty) {
-    //if name is empty, it is an error
+    //when field is touched, it is error:
+    //if name is empty
     if (!name) {
       setError(requiredMessage);
       return false;
     }
-    //if name doesn't match our regular expression and it is touched
+
+    //if name doesn't match our regular expression
     if (!name.match(pattern.value)) {
       setError(pattern.message);
       return false;
     }
   }
 
-  //otherwise there is no error and we want to return true
+  //otherwise there is no error and we want to return true and clean the error message
   setError("");
   return true;
 };

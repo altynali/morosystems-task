@@ -4,7 +4,7 @@ import { MyInput } from "../input/MyInput";
 import classes from "./Form.module.css";
 import { useAppDispatch } from "../../redux/store";
 import { createTodo } from "../../redux/todo/thunks";
-import { isNameValid } from "../../utils/validation/validation";
+import { isNameValid } from "../../utils/validation/nameValidation";
 import { debounce } from "../../utils/debounce/debounce";
 
 export const Form = () => {

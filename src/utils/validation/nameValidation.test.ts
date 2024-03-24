@@ -1,4 +1,4 @@
-import { isNameValid } from "./validation";
+import { isNameValid, nameValidation } from "./nameValidation";
 
 describe("isNameValid", () => {
   const setErrorMock = jest.fn();
@@ -7,12 +7,13 @@ describe("isNameValid", () => {
     setErrorMock.mockClear();
   });
 
-  test("returns true when name is valid", () => {
-    const name = "John Doe";
+  test("returns true when todo name is valid", () => {
+    const name = "Todo Todo";
     const isDirty = true;
     const result = isNameValid(name, isDirty, setErrorMock);
 
     expect(result).toBe(true);
+    expect(setErrorMock).toHaveBeenCalledWith("");
   });
 
   test("returns false and sets error message when name is empty", () => {
@@ -21,22 +22,24 @@ describe("isNameValid", () => {
     const result = isNameValid(name, isDirty, setErrorMock);
 
     expect(result).toBe(false);
-    expect(setErrorMock).toBeCalledWith("Name is required");
+    expect(setErrorMock).toHaveBeenCalledWith(nameValidation.requiredMessage);
   });
 
   test("returns false and sets error message when name does not match pattern", () => {
-    const name = "123"; // Invalid name
+    const name = "123";
     const isDirty = true;
     const result = isNameValid(name, isDirty, setErrorMock);
 
     expect(result).toBe(false);
+    expect(setErrorMock).toHaveBeenCalledWith(nameValidation.pattern.message);
   });
 
   test("returns true when name is empty but not dirty", () => {
     const name = "";
-    const isDirty = false; // Not dirty
+    const isDirty = false;
     const result = isNameValid(name, isDirty, setErrorMock);
 
-    expect(result).toBe(true); // Returns true because the field is not yet touched
+    expect(result).toBe(true);
+    expect(setErrorMock).toHaveBeenCalledWith("");
   });
 });
