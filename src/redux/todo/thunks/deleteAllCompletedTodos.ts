@@ -1,17 +1,17 @@
-import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios"
-import { deleteTodo } from "./deleteTodo"
-import { TodoType } from "../types"
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { deleteTodo } from "./deleteTodo";
+import { TodoType } from "../types";
 
 interface Payload {
-  todos: TodoType[]
+  todos: TodoType[];
 }
 
 export const deleteAllCompletedTodos = createAsyncThunk<
   void,
   Payload,
   {
-    rejectValue: any
+    rejectValue: unknown;
   }
 >(
   "todoReducer/deleteAllCompletedTodos",
@@ -20,13 +20,15 @@ export const deleteAllCompletedTodos = createAsyncThunk<
       await Promise.all(
         todos.map(async (todo) => {
           if (todo.completed) {
-            await dispatch(deleteTodo({ id: todo.id }))
+            await dispatch(deleteTodo({ id: todo.id }));
           }
         })
-      )
+      );
     } catch (error) {
-      const errorData = axios.isAxiosError(error) ? error.response?.data : error
-      return rejectWithValue(errorData)
+      const errorData = axios.isAxiosError(error)
+        ? error.response?.data
+        : error;
+      return rejectWithValue(errorData);
     }
   }
-)
+);

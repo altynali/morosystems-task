@@ -16,7 +16,6 @@ export const isNameValid = (
   setError: (error: string) => void
 ) => {
   const { requiredMessage, pattern } = nameValidation;
-  console.log(isDirty);
 
   if (isDirty) {
     //if name is empty, it is an error

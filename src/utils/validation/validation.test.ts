@@ -36,7 +36,6 @@ describe("isNameValid", () => {
     const name = "";
     const isDirty = false; // Not dirty
     const result = isNameValid(name, isDirty, setErrorMock);
-    console.log(result);
 
     expect(result).toBe(true); // Returns true because the field is not yet touched
   });
