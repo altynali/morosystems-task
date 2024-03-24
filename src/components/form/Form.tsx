@@ -1,11 +1,11 @@
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
-import { MyInput } from "../input/MyInput";
+import { MyInput } from "../../shared/components/input/MyInput";
 import classes from "./Form.module.css";
-import { useAppDispatch } from "../../redux/store";
-import { createTodo } from "../../redux/todo/thunks";
-import { isNameValid } from "../../utils/validation/nameValidation";
-import { debounce } from "../../utils/debounce/debounce";
+import { useAppDispatch } from "../../shared/redux/store";
+import { createTodo } from "../../shared/redux/todo/thunks";
+import { isNameValid } from "../../shared/utils/validation/nameValidation";
+import { debounce } from "../../shared/utils/debounce/debounce";
 
 export const Form = () => {
   const dispatch = useAppDispatch();

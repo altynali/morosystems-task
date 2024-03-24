@@ -1,40 +1,40 @@
-import { TodoItem } from "../item/TodoItem"
-import { useAppDispatch, useAppSelector } from "../../../redux/store"
-import classes from "./TodoList.module.css"
-import { Grid } from "@mui/material"
-import { TodoTopSection } from "../topSection/TodoTopSection"
-import { useCallback, useEffect, useState } from "react"
-import { filterTodos } from "../../../utils/filterTodos"
-import { selectTodoReducer } from "../../../redux/todo/todoSlice"
-import { deleteAllCompletedTodos } from "../../../redux/todo/thunks"
-import { makeAllTodosCompleted } from "../../../redux/todo/thunks"
-import { TodoType, FilterTodoByValues } from "../../../redux/todo/types"
+import { TodoItem } from "../item/TodoItem";
+import { useAppDispatch, useAppSelector } from "../../../shared/redux/store";
+import classes from "./TodoList.module.css";
+import { Grid } from "@mui/material";
+import { TodoTopSection } from "../topSection/TodoTopSection";
+import { useCallback, useEffect, useState } from "react";
+import { filterTodos } from "../../../shared/utils/filterTodos";
+import { selectTodoReducer } from "../../../shared/redux/todo/todoSlice";
+import { deleteAllCompletedTodos } from "../../../shared/redux/todo/thunks";
+import { makeAllTodosCompleted } from "../../../shared/redux/todo/thunks";
+import { TodoType, FilterTodoByValues } from "../../../shared/redux/todo/types";
 
 export const TodoList = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const { todos } = useAppSelector(selectTodoReducer)
-  const [filteredTodos, setFilteredTodos] = useState<TodoType[]>(todos)
+  const { todos } = useAppSelector(selectTodoReducer);
+  const [filteredTodos, setFilteredTodos] = useState<TodoType[]>(todos);
 
   const handleChangeFilterTodoBy = useCallback(
     (filterTodoBy: FilterTodoByValues) => {
-      const newTodos = filterTodos(todos, filterTodoBy)
-      setFilteredTodos(newTodos)
+      const newTodos = filterTodos(todos, filterTodoBy);
+      setFilteredTodos(newTodos);
     },
     [todos]
-  )
+  );
 
   const handleDeleteAllCompletedTodos = () => {
-    dispatch(deleteAllCompletedTodos({ todos }))
-  }
+    dispatch(deleteAllCompletedTodos({ todos }));
+  };
 
   const handleMakeAllTodosCompleted = () => {
-    dispatch(makeAllTodosCompleted({ todos }))
-  }
+    dispatch(makeAllTodosCompleted({ todos }));
+  };
 
   useEffect(() => {
-    setFilteredTodos(todos)
-  }, [todos])
+    setFilteredTodos(todos);
+  }, [todos]);
 
   return (
     <>
@@ -55,5 +55,5 @@ export const TodoList = () => {
           : "no todos"}
       </Grid>
     </>
-  )
-}
+  );
+};

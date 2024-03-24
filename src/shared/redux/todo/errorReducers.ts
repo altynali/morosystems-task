@@ -1,4 +1,4 @@
-import { CaseReducer } from "@reduxjs/toolkit";
+import { Action, CaseReducer } from "@reduxjs/toolkit";
 import {
   fetchTodos,
   createTodo,
@@ -9,7 +9,7 @@ import {
 } from "./thunks";
 import { FetchState, TodoState } from "./types";
 
-type ErrorReducerFunction = CaseReducer<TodoState, unknown>;
+type ErrorReducerFunction = CaseReducer<TodoState, Action>;
 
 export const errorReducers: Record<string, ErrorReducerFunction> = {
   [fetchTodos.rejected.type]: (state) => {

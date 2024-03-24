@@ -1,16 +1,16 @@
-import { FC, PropsWithChildren } from "react"
-import { Footer } from "../footer/Footer"
-import { Header } from "../header/Header"
-import classes from "./Layout.module.css"
-import { useAppSelector } from "../../redux/store"
-import { Loader } from "../loader/Loader"
-import { selectTodoReducer } from "../../redux/todo/todoSlice"
-import { FetchState } from "../../redux/todo/types"
+import { FC, PropsWithChildren } from "react";
+import { Footer } from "./footer/Footer";
+import { Header } from "./header/Header";
+import classes from "./Layout.module.css";
+import { useAppSelector } from "../../shared/redux/store";
+import { Loader } from "../../shared/components/loader/Loader";
+import { selectTodoReducer } from "../../shared/redux/todo/todoSlice";
+import { FetchState } from "../../shared/redux/todo/types";
 
-export type LayoutProps = PropsWithChildren
+export type LayoutProps = PropsWithChildren;
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
-  const { fetchState } = useAppSelector(selectTodoReducer)
+  const { fetchState } = useAppSelector(selectTodoReducer);
 
   return (
     <div className={classes.root}>
@@ -20,5 +20,5 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
       </div>
       <Footer />
     </div>
-  )
-}
+  );
+};

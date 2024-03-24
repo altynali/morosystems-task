@@ -4,22 +4,21 @@ import {
   MenuItem,
   Select,
   SelectProps,
-} from "@mui/material"
-import { FC } from "react"
-import { Option } from "../../redux/todo/types"
+} from "@mui/material";
+import { FC } from "react";
+import { Option } from "../../redux/todo/types";
 
 type MySelectProps = {
-  name: string
-  label: string
-  options: Option[]
-  helperText?: string
-} & SelectProps
+  name: string;
+  label: string;
+  options: Option[];
+  helperText?: string;
+} & SelectProps;
 
-const MySelect: FC<MySelectProps> = ({
+export const MySelect: FC<MySelectProps> = ({
   name,
   label,
   defaultValue,
-  fullWidth = true,
   options,
   helperText,
   ...props
@@ -42,7 +41,5 @@ const MySelect: FC<MySelectProps> = ({
       </Select>
       {helperText ? <FormHelperText error>{helperText}</FormHelperText> : null}
     </>
-  )
-}
-
-export default MySelect
+  );
+};

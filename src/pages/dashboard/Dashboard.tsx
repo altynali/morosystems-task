@@ -1,6 +1,6 @@
-import { Box } from "@mui/material"
-import { Form } from "../../components/form/Form"
-import { TodoList } from "../../components/todo/list/TodoList"
+import { Box } from "@mui/material";
+import { Form } from "../../components/form/Form";
+import { TodoList } from "../../components/todo/list/TodoList";
 
 const Dashboard = () => {
   return (
@@ -8,7 +8,7 @@ const Dashboard = () => {
       <Form />
       <TodoList />
     </Box>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

@@ -1,50 +1,50 @@
-import { FC, useEffect, useState } from "react"
-import { Grid, Typography } from "@mui/material"
-import { MyCard } from "../../card/MyCard"
-import classes from "./TodoItem.module.css"
-import { convertTime } from "../../../utils/convertTime"
-import { useAppDispatch } from "../../../redux/store"
-import { TodoText } from "../text/TodoText"
-import { completeTodo } from "../../../redux/todo/thunks"
-import { deleteTodo } from "../../../redux/todo/thunks"
-import { incompleteTodo } from "../../../redux/todo/thunks"
-import { TodoType } from "../../../redux/todo/types"
+import { FC, useEffect, useState } from "react";
+import { Grid, Typography } from "@mui/material";
+import { MyCard } from "../../../shared/components/card/MyCard";
+import classes from "./TodoItem.module.css";
+import { convertTime } from "../../../shared/utils/convertTime";
+import { useAppDispatch } from "../../../shared/redux/store";
+import { TodoText } from "../text/TodoText";
+import { completeTodo } from "../../../shared/redux/todo/thunks";
+import { deleteTodo } from "../../../shared/redux/todo/thunks";
+import { incompleteTodo } from "../../../shared/redux/todo/thunks";
+import { TodoType } from "../../../shared/redux/todo/types";
 
 export type TodoItemProps = {
-  todo: TodoType
-}
+  todo: TodoType;
+};
 
 export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const { id, text, completedDate, createdDate, completed } = todo
+  const { id, text, completedDate, createdDate, completed } = todo;
 
-  const [isCompleted, setIsCompleted] = useState<boolean>(completed)
+  const [isCompleted, setIsCompleted] = useState<boolean>(completed);
 
   const onCheckboxOnchange = () => {
-    const updatedIsCompleted = !isCompleted
-    setIsCompleted(updatedIsCompleted)
+    const updatedIsCompleted = !isCompleted;
+    setIsCompleted(updatedIsCompleted);
 
     if (id) {
-      handleComplete?.(id, updatedIsCompleted)
+      handleComplete?.(id, updatedIsCompleted);
     }
-  }
+  };
 
   useEffect(() => {
-    setIsCompleted(completed)
-  }, [completed])
+    setIsCompleted(completed);
+  }, [completed]);
 
   const handleDeleteTodo = () => {
-    dispatch(deleteTodo({ id }))
-  }
+    dispatch(deleteTodo({ id }));
+  };
 
   const handleComplete = (id: string, isCompleted: boolean) => {
     if (isCompleted) {
-      dispatch(completeTodo({ id }))
+      dispatch(completeTodo({ id }));
     } else {
-      dispatch(incompleteTodo({ id }))
+      dispatch(incompleteTodo({ id }));
     }
-  }
+  };
 
   return (
     <Grid
@@ -76,5 +76,5 @@ export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
         )}
       </MyCard>
     </Grid>
-  )
-}
+  );
+};

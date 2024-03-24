@@ -1,12 +1,18 @@
-import "./App.css"
-import MainRouter from "./router/MainRouter"
+import "./App.css";
+import { Layout } from "./components/layout/Layout";
+import ErrorBoundary from "./providers/errorBoundary";
+import MainRouter from "./providers/router/MainRouter";
+import { CssBaseline } from "@mui/material";
 
 function App() {
   return (
-    <div>
-      <MainRouter />
-    </div>
-  )
+    <ErrorBoundary>
+      <CssBaseline />
+      <Layout>
+        <MainRouter />
+      </Layout>
+    </ErrorBoundary>
+  );
 }
 
-export default App
+export default App;

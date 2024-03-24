@@ -39,7 +39,7 @@ describe("filterTodos", () => {
   });
 
   test("should return all todos when FilterTodoByValues is unknown", () => {
-    const filteredTodos = filterTodos(todos, "unknown" as FilterTodoByValues); // Passing unknown value
+    const filteredTodos = filterTodos(todos, "unknown" as FilterTodoByValues);
     expect(filteredTodos).toEqual(todos);
   });
 });

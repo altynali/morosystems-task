@@ -1,29 +1,29 @@
-import { FC, useState } from "react"
-import { Typography } from "@mui/material"
-import classes from "./TodoText.module.css"
-import { MyInput } from "../../input/MyInput"
-import { useAppDispatch } from "../../../redux/store"
-import { editTodoText } from "../../../redux/todo/thunks"
+import { FC, useState } from "react";
+import { Typography } from "@mui/material";
+import classes from "./TodoText.module.css";
+import { MyInput } from "../../../shared/components/input/MyInput";
+import { useAppDispatch } from "../../../shared/redux/store";
+import { editTodoText } from "../../../shared/redux/todo/thunks";
 
 export type TodoTextProps = {
-  id: string
-  text: string
-}
+  id: string;
+  text: string;
+};
 
 export const TodoText: FC<TodoTextProps> = ({ id, text }) => {
-  const [editMode, setEditMode] = useState<boolean>(false)
-  const [newText, setNewText] = useState<string>(text)
-  const dispatch = useAppDispatch()
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [newText, setNewText] = useState<string>(text);
+  const dispatch = useAppDispatch();
 
   const handleEdit = () => {
     if (text === newText) {
-      setEditMode(false)
-      return
+      setEditMode(false);
+      return;
     } else {
-      dispatch(editTodoText({ id, newText }))
-      setEditMode(false)
+      dispatch(editTodoText({ id, newText }));
+      setEditMode(false);
     }
-  }
+  };
 
   return (
     <div className={classes.wrapper}>
@@ -52,5 +52,5 @@ export const TodoText: FC<TodoTextProps> = ({ id, text }) => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
